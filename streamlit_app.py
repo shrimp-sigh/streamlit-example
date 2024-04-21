@@ -101,6 +101,8 @@ def page2():
     st.plotly_chart(tb2)
 #检测session_state中是否有page这个键，没有则初始化page键为“home”
 
+
+
 with st.sidebar: #在侧边栏中创建菜单以导航到不同的页面
     st.header("导航栏") #侧栏标题
     if st.button("首页"):
