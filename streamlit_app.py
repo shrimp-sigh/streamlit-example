@@ -7,8 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import streamlit as st
 
-
-data = pd.read_csv("D:\\Python\\PyCharm\\task_metrics.csv")
+data = pd.read_csv("task_metrics.csv")
 
 
 scaler = MinMaxScaler()
