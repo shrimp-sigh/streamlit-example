@@ -8,7 +8,7 @@ import numpy as np
 import streamlit as st
 
 
-data = pd.read_csv("E:\\edge\\task_metrics.csv")
+data = pd.read_csv("D:\\Python\\PyCharm\\task_metrics.csv")
 
 
 scaler = MinMaxScaler()
@@ -100,8 +100,6 @@ def page2():
     tb2.update_layout(legend_title_text='quality_score')
     st.plotly_chart(tb2)
 #检测session_state中是否有page这个键，没有则初始化page键为“home”
-
-
 
 with st.sidebar: #在侧边栏中创建菜单以导航到不同的页面
     st.header("导航栏") #侧栏标题
