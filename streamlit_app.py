@@ -37,6 +37,8 @@ if 'page' not in st.session_state:
     st.session_state.page = "home"
 #首页
 def home():
+    st.balloons()
+    st.snow()
     st.title('课程质量评估')
     # 用户输入
     watch_time_sum = st.number_input('总观看时间')
