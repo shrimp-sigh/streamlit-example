@@ -7,6 +7,8 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import streamlit as st
+
+from PIL import Image
 import plotly.express as px
 data = pd.read_csv("task_metrics.csv")
 
@@ -51,8 +53,9 @@ def home():
 
     st.text('''
     教育大数据分析系统可以帮助在线教育平台对学习对象、学习内容和学习质量等进行分析。
-    教育机构希望借助平台数据，为讲师提供课程质量反馈信息以提升教学效果；从而提供更加精准和有效的教育服务，
-    打造一个全面的在线教育平台。请基于给出的数据集，并在必要时补充数据，实现基于 Web 的在线教育综合大数据分析系统的设计和开发，
+    教育机构希望借助平台数据，为讲师提供课程质量反馈信息以提升教学效果；
+    从而提供更加精准和有效的教育服务，打造一个全面的在线教育平台。请基于给出的数据集，
+    并在必要时补充数据，实现基于 Web 的在线教育综合大数据分析系统的设计和开发，
     为在线平台提供辅助决策支持。
     ''')
     st.header('2. 功能介绍')
@@ -62,6 +65,19 @@ def home():
         打造一个全面的在线教育平台。请基于给出的数据集，并在必要时补充数据，实现基于 Web 的在线教育综合大数据分析系统的设计和开发，
         为在线平台提供辅助决策支持。
     ''')
+    st.header('3. 数据集来源')
+
+    image = Image.open("gyy.png")
+
+    st.image(image,
+             caption='标题',
+             width=500
+    )
+    st.text('''
+        数据集来源于泰迪云课堂平台，因此此次分析是基于泰迪云课堂平台，为该在线平台提供辅助决策支持
+        ''')
+
+
 # 页面1
 
 def page1():
