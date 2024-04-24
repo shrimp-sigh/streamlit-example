@@ -48,7 +48,7 @@ if 'page' not in st.session_state:
 
 # 首页
 def home():
-    st.title("教育大数据分析系统")
+    st.markdown('<h1 style="color: blue;">教育大数据分析系统 -- streamlit</h1>', unsafe_allow_html=True)
     st.header('1. 介绍')
 
     st.text('''
