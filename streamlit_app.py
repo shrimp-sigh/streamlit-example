@@ -9,9 +9,68 @@ import numpy as np
 import streamlit as st
 
 from PIL import Image
-import plotly.express as px
-data = pd.read_csv("task_metrics.csv")
 
+# 自定义 CSS 样式
+custom_css = """
+<style>
+/* 主体样式 */
+body {
+    background: linear-gradient(to right, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d, #f56040, #f77737, #fcaf45, #ffdc80);
+    color: #ffffff;
+    font-family: 'Arial';
+}
+
+/* 标题样式 */
+h1 {
+    font-size: 3.5em;
+    color: #7fffd4; /* 浅蓝色 */
+    text-shadow: 2px 2px 4px #000000;
+}
+
+/* 段落样式 */
+p {
+    font-size: 1.2em;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+/* 按钮样式 */
+.stButton>button {
+    background-color: #ffffff;
+    color: #7fffd4; /* 浅蓝色 */
+    border-radius: 30px;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    text-shadow: none;
+}
+
+.stButton>button:hover {
+    background-color: #5851db;
+    color: #ffffff;
+}
+
+/* 文本输入框样式 */
+.stTextInput>div>div>input {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #000000;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stTextInput>div>div>input:focus {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+</style>
+"""
+
+# 在页面中注入自定义 CSS 样式
+st.markdown(custom_css, unsafe_allow_html=True)
+
+data = pd.read_csv("task_metrics.csv")
 
 scaler = MinMaxScaler()
 data_normalized = scaler.fit_transform(data[['watch_time_sum', 'unique_watchers',  'completion_rate','total_watch_count','repetition_rate']])
@@ -48,7 +107,7 @@ if 'page' not in st.session_state:
 
 # 首页
 def home():
-    st.markdown('<h1 style="color: blue;">教育大数据分析系统 -- streamlit</h1>', unsafe_allow_html=True)
+    st.title('教育大数据分析系统')
     st.header('1. 介绍')
 
     st.text('''
@@ -67,7 +126,7 @@ def home():
     ''')
     st.header('3. 数据集来源')
 
-    image = Image.open("gyy.png")
+    image = Image.open('gyy.png')
 
     st.image(image,
              caption='标题',
