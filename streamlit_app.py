@@ -8,7 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import streamlit as st
 import plotly.express as px
-data = pd.read_csv("D:\\PCdesk\\competition\\image\\task_metrics.csv")
+data = pd.read_csv("task_metrics.csv")
 
 
 scaler = MinMaxScaler()
