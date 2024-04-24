@@ -46,32 +46,22 @@ if 'page' not in st.session_state:
 
 # 首页
 def home():
-    st.title('课程质量评估')
-    # 用户输入
-    watch_time_sum = st.number_input('总观看时间')
-    unique_watchers = st.number_input('观看人数')
-    total_watch_count = st.number_input('播放量')
-    completion_rate = st.number_input('完成率')
+    st.title("教育大数据分析系统")
+    st.header('1. 介绍')
 
-    # 添加按钮
-    btn_generate_score = st.button('生成课程质量评分')
-    selected_model = st.radio("选择模型", ("线性回归模型", "决策树模型"))
-
-    if btn_generate_score:
-        if selected_model == "线性回归模型":
-            model = model1
-        elif selected_model == "决策树模型":
-            model = model2
-
-        repetition_rate = unique_watchers * completion_rate  # 计算 repetition_rate
-        user_input_normalized = scaler.transform([[watch_time_sum, unique_watchers, completion_rate, total_watch_count,repetition_rate]])
-        quality_score_pred = model.predict(user_input_normalized)
-
-        all_scores_with_pred = np.append(y, quality_score_pred)
-        rank_of_pred = np.argsort(np.argsort(-all_scores_with_pred))[-1] + 1
-
-        st.write(f'课程质量得分: {quality_score_pred[0]}，在所有744个课程质量得分中的排名为: {rank_of_pred}')
-
+    st.text('''
+    教育大数据分析系统可以帮助在线教育平台对学习对象、学习内容和学习质量等进行分析。
+    教育机构希望借助平台数据，为讲师提供课程质量反馈信息以提升教学效果；从而提供更加精准和有效的教育服务，
+    打造一个全面的在线教育平台。请基于给出的数据集，并在必要时补充数据，实现基于 Web 的在线教育综合大数据分析系统的设计和开发，
+    为在线平台提供辅助决策支持。
+    ''')
+    st.header('2. 功能介绍')
+    st.text('''
+        教育大数据分析系统可以帮助在线教育平台对学习对象、学习内容和学习质量等进行分析。
+        教育机构希望借助平台数据，为讲师提供课程质量反馈信息以提升教学效果；从而提供更加精准和有效的教育服务，
+        打造一个全面的在线教育平台。请基于给出的数据集，并在必要时补充数据，实现基于 Web 的在线教育综合大数据分析系统的设计和开发，
+        为在线平台提供辅助决策支持。
+    ''')
 # 页面1
 
 def page1():
@@ -132,33 +122,37 @@ def page3():
     table4.update_yaxes(title_text="课程数量")
     st.plotly_chart(table4)
 def page4():
-    # 读取数据
-    data = pd.read_csv("D:\\PCdesk\\competition\\data\\log.csv")
+    st.title('课程质量评估')
+    # 用户输入
+    watch_time_sum = st.number_input('总观看时间')
+    unique_watchers = st.number_input('观看人数')
+    total_watch_count = st.number_input('播放量')
+    completion_rate = st.number_input('完成率')
 
-    # 计算每个类别的计数信息
-    category_distribution = data['action'].value_counts()
+    # 添加按钮
+    btn_generate_score = st.button('生成课程质量评分')
+    selected_model = st.radio("选择模型", ("线性回归模型", "决策树模型"))
 
-    # 取出现次数最多的4个类型
-    top_4_categories = category_distribution.head(4)
+    if btn_generate_score:
+        if selected_model == "线性回归模型":
+            model = model1
+        elif selected_model == "决策树模型":
+            model = model2
 
-    # 计算其他类型的总计数
-    other_count = category_distribution.sum() - top_4_categories.sum()
+        repetition_rate = unique_watchers * completion_rate  # 计算 repetition_rate
+        user_input_normalized = scaler.transform(
+            [[watch_time_sum, unique_watchers, completion_rate, total_watch_count, repetition_rate]])
+        quality_score_pred = model.predict(user_input_normalized)
 
-    # 将其他类型的计数合并到“其他”类型中
-    top_4_categories['其他'] = other_count
+        all_scores_with_pred = np.append(y, quality_score_pred)
+        rank_of_pred = np.argsort(np.argsort(-all_scores_with_pred))[-1] + 1
 
-    # 打印分类分布情况
-    st.write(top_4_categories)
-
-    # 使用 Plotly 绘制饼图
-    fig = px.pie(values=top_4_categories, names=top_4_categories.index, title='日志类型')
-    st.plotly_chart(fig)
-    st.write("由日志表操作类型可见，大多数用户都是可以登录成功的，可见该平台系统运行稳定")
+        st.write(f'课程质量得分: {quality_score_pred[0]}，在所有744个课程质量得分中的排名为: {rank_of_pred}')
 
 # 检测session_state中是否有page这个键，没有则初始化page键为“home”
 with st.sidebar: #在侧边栏中创建菜单以导航到不同的页面
     st.header("导航栏") #侧栏标题
-    if st.button("首页"):
+    if st.button("系统概览"):
         st.session_state.page = "home" #将值赋给session_state.page
     if st.button("第二页"):
         st.session_state.page = "page1"
@@ -166,7 +160,7 @@ with st.sidebar: #在侧边栏中创建菜单以导航到不同的页面
         st.session_state.page = "page2"
     if st.button("第四页"):
         st.session_state.page = "page3"
-    if st.button("日志表分析"):
+    if st.button("课程质量评估"):
         st.session_state.page = "page4"
 
 
