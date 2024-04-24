@@ -107,6 +107,8 @@ if 'page' not in st.session_state:
 
 # 首页
 def home():
+    st.balloons()
+    st.snow()
     st.title('教育大数据分析系统')
     st.header('1. 介绍')
 
