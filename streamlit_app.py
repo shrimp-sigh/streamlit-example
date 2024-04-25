@@ -43,11 +43,13 @@ p {
     font-weight: bold;
     padding: 10px 20px;
     text-shadow: none;
+    font-size: 12px;
 }
 
 .stButton>button:hover {
     background-color: #5851db;
     color: #ffffff;
+    
 }
 
 /* 文本输入框样式 */
@@ -70,7 +72,7 @@ p {
 # 在页面中注入自定义 CSS 样式
 st.markdown(custom_css, unsafe_allow_html=True)
 
-data = pd.read_csv("task_metrics.csv")
+data = pd.read_csv("C:\\Users\\86137\\Desktop\\1\\task_metrics.csv")
 
 scaler = MinMaxScaler()
 data_normalized = scaler.fit_transform(data[['watch_time_sum', 'unique_watchers',  'completion_rate','total_watch_count','repetition_rate']])
@@ -128,7 +130,7 @@ def home():
     ''')
     st.header('3. 数据集来源')
 
-    image = Image.open('gyy.png')
+    image = Image.open("C:\\Users\\86137\\Desktop\\1\\gyy.png")
 
     st.image(image,
              caption='标题',
@@ -158,46 +160,109 @@ def page2():
     #tb1.update_layout(legend_title_text='quality_score')#添加图例
     #st.plotly_chart(tb1) #在页面中显示图表
 
-    table1 = go.Figure()
-    x1 = data['completion_rate']
-    table1.add_trace(go.Histogram(x=x1,name='完播率'))
-    table1.update_layout(barmode='stack',title='完播率分布')
-    table1.update_traces(opacity=0.8)
-    table1.update_xaxes(title_text="完播率")
-    table1.update_yaxes(title_text="课程数量")
-    st.plotly_chart(table1)
+    #table1 = go.Figure()
+    # x1 = data['completion_rate']
+    # table1.add_trace(go.Histogram(x=x1,name='完播率'))
+    # table1.update_layout(barmode='stack',title='完播率分布')
+    # table1.update_traces(opacity=0.8)
+    # table1.update_xaxes(title_text="完播率")
+    # table1.update_yaxes(title_text="课程数量")
+    # st.plotly_chart(table1)#
 
-    table2 = go.Figure()
-    x2 = data['unique_watchers']
-    x3 = data['total_watch_count']
-    x4 = data['repetition_rate']
-    table2.add_trace(go.Histogram(x=x2, name='课程观看人数分布'))
-    table2.update_layout(barmode='stack', title='观看人数分布')
-    table2.update_traces(opacity=0.8)
-    table2.update_xaxes(title_text="课程观看人数")
-    table2.update_yaxes(title_text="课程数量")
-    st.plotly_chart(table2)
+    image = Image.open("C:\\Users\\86137\\Desktop\\1\\Figure_1.png")
 
+    st.image(image,
+             caption='完播率分析',
+             width=800
+             )
+    st.text('''
+             (1)根据表格中的数据，completion_rate列的数值范围从0到1，平均值约为0.652。
+             通过直方图显示completion_rate的分布情况。我们可以看到有两个主要的峰值，
+             一个在0附近，表示有一部分课程几乎没有完成者；另一个峰值接近1，表示有相当一部分课程被完全完成。
+             而箱形图则展示了数据的分布范围和中位数。从箱形图中可以观察到，
+             有一些课程的完成率为0，而中位数在0.8左右，表明大多数课程至少完成了80%。
+
+            ''')
+
+
+    # table2 = go.Figure()
+    # x2 = data['unique_watchers']
+    # x3 = data['total_watch_count']
+    # x4 = data['repetition_rate']
+    # table2.add_trace(go.Histogram(x=x2, name='课程观看人数分布'))
+    # table2.update_layout(barmode='stack', title='观看人数分布')
+    # table2.update_traces(opacity=0.8)
+    # table2.update_xaxes(title_text="课程观看人数")
+    # table2.update_yaxes(title_text="课程数量")
+    # st.plotly_chart(table2)
+    image = Image.open("C:\\Users\\86137\\Desktop\\1\\Figure_2.png")
+
+    st.image(image,
+             caption='观看人数分析',
+             width=800
+             )
+    st.text('''
+            (2)接下来，我们将对unique_watchers这一列进行分析。
+            根据unique_watchers列的基本统计信息，平均独立观看者数量为6.85，标准差较大，为24.1，
+            表明数据分布具有较大的变异性。
+            观看者人数从1人到465人不等，中位数仅为2人，这表明大多数课程的观看者数量相对较少，
+            但存在少数几个课程有非常多的观看者。
+            接下来，我们将通过绘制直方图和箱形图来更详细地查看这个分布情况。
+            这些图表将帮助我们可视化不同课程中独立观看者数量的频率和范围。
+            让我们来看看这些图表。 
+            在这两个图表中，我们可以看到以下信息：
+            •直方图显示unique_watchers的分布是右偏的，大多数课程的观看者数量很少，
+            但有少数课程有异常高的观看者数。
+            这种分布表明，大多数课程的吸引力相对有限，只吸引了少量独立观看者。
+            •箱形图进一步揭示了这种分布的特点，其中50%的数据都集中在5个以下的观看者数，
+            但同时存在一些极端的离群值，这表示有些课程非常受欢迎。
+            ''')
 # 页面2
 def page3():
-    table3 = go.Figure()
-    x3 = data['total_watch_count']
-    x4 = data['repetition_rate']
-    table3.add_trace(go.Histogram(x=x3, name='课程播放量分布'))
-    table3.update_layout(barmode='stack', title='播放量分布')
-    table3.update_traces(opacity=0.8)
-    table3.update_xaxes(title_text="课程播放量")
-    table3.update_yaxes(title_text="课程数量")
-    st.plotly_chart(table3)
-
+    # table3 = go.Figure()
+    # x3 = data['total_watch_count']
+    # x4 = data['repetition_rate']
+    # table3.add_trace(go.Histogram(x=x3, name='课程播放量分布'))
+    # table3.update_layout(barmode='stack', title='播放量分布')
+    # table3.update_traces(opacity=0.8)
+    # table3.update_xaxes(title_text="课程播放量")
+    # table3.update_yaxes(title_text="课程数量")
+    # st.plotly_chart(table3)
+    image = Image.open("C:\\Users\\86137\\Desktop\\1\\Figure4.png")
+    st.image(image,
+             caption='播放量分析',
+             width=600
+             )
     table4 = go.Figure()
-    x4 = data['repetition_rate']
-    table4.add_trace(go.Histogram(x=x4, name='课程重播率分布'))
-    table4.update_layout(barmode='stack', title='重播率分布')
-    table4.update_traces(opacity=0.8)
-    table4.update_xaxes(title_text="课程重播率")
-    table4.update_yaxes(title_text="课程数量")
-    st.plotly_chart(table4)
+    st.text('''
+               (3)这是 "total_watch_count" 列的基本统计数据和分布图：在总共744个课程中，其平均观看次数为1335.74次，
+               观看次数的标准差约为4684.43，显示出数据的巨大波动。其中最小的观看值仅为1次，其中有25%的课程观看次数不超过31次，
+               有一半的课程观看次数低于310次，
+               有75%的课程观看次数不超过1059次，但是其中最大的观看次数为92211次，从分布图中可以看出，
+               绝大多数课程的观看次数都较低，但存在一些极端的高值。这些极端值表明仅有少数课程极受欢迎。
+               ''')
+    # x4 = data['repetition_rate']
+    # table4.add_trace(go.Histogram(x=x4, name='课程重播率分布'))
+    # table4.update_layout(barmode='stack', title='重播率分布')
+    # table4.update_traces(opacity=0.8)
+    # table4.update_xaxes(title_text="课程重播率")
+    # table4.update_yaxes(title_text="课程数量")
+    # st.plotly_chart(table4)
+    image = Image.open("C:\\Users\\86137\\Desktop\\1\\Figure_3.png")
+    st.image(image,
+             caption='播放量分析',
+             width=800
+             )
+    st.text('''
+            (4)基本统计信息显示，这个列的均值为201.36，标准差为321.18，这表明观看行为的重复频率具有很大的差异。
+            最小值为1，而最大值达到了3781，这表明某些课程可能非常受欢迎或者内容引人回看。
+            接下来，我们使用直方图和箱形图来进一步探索这种分布的特性。
+            这些图表将帮助我们更好地理解数据的总体趋势和异常值。
+            •直方图揭示了重复观看率的分布是极度右偏的，多数课程的重复观看率较低，
+            但也有一些极端的高值，表明少数课程被反复观看的次数非常高。
+            •箱形图进一步证实了这一点，显示大多数数据点集中在较低的重复观看率区间，
+            但存在大量离群值，这意味着有些课程的内容可能极具吸引力，促使观看者多次回看。
+                   ''')
 def page4():
     st.title('课程质量评估')
     # 用户输入
@@ -231,7 +296,7 @@ with st.sidebar: #在侧边栏中创建菜单以导航到不同的页面
     st.header("导航栏") #侧栏标题
     if st.button("系统概览"):
         st.session_state.page = "home" #将值赋给session_state.page
-    if st.button("第二页"):
+    if st.button("课程评分标准"):
         st.session_state.page = "page1"
     if st.button("第三页"):
         st.session_state.page = "page2"
