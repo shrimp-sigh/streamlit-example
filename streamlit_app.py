@@ -82,11 +82,11 @@ data_normalized = pd.DataFrame(data_normalized,
                                columns=['watch_time_sum', 'unique_watchers', 'completion_rate', 'total_watch_count',
                                         'repetition_rate'])
 
-quality_score = (data_normalized['watch_time_sum'] * 10 +
-                 data_normalized['unique_watchers'] * 5 +
-                 data_normalized['total_watch_count'] * 5 +
-                 data_normalized['repetition_rate'] * 0.01 +
-                 data_normalized['completion_rate'] * 0.2)
+quality_score = (data_normalized['watch_time_sum']*0.00567+
+data_normalized['unique_watchers']*0.00705+
+data_normalized['total_watch_count']*0.00529+
+data_normalized['repetition_rate']*0.11243+
+data_normalized['completion_rate']*0.86956)
 
 X = data_normalized[['watch_time_sum', 'unique_watchers', 'completion_rate', 'total_watch_count', 'repetition_rate']]
 y = quality_score
