@@ -18,6 +18,7 @@ body {
     background: linear-gradient(to right, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d, #f56040, #f77737, #fcaf45, #ffdc80);
     color: #7fffd4;
     font-family: 'Arial';
+    font-weight: bold;
 }
 
 /* 标题样式 */
@@ -26,6 +27,7 @@ h1 {
     color: #7fffd4; /* 浅蓝色 */
     text-shadow: 2px 2px 4px #000000;
     text-align: center; /* 让标题居中 */
+    font-weight: bold;
 }
 
 /* 段落样式 */
@@ -48,7 +50,7 @@ p {
 }
 .stButton>button:hover {
     background-color: #5851db;
-    
+    font-weight: bold;
 }
 
 /* 文本输入框样式 */
